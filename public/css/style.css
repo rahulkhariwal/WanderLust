@@ -1,0 +1,86 @@
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container {
+ flex: 1;
+}
+.navbar{
+    height: 5 rem;
+}  
+
+.fa-compass{
+    color: #fe424d;
+    font-size: 2 rem;
+}
+
+.nav-link{
+    color: #222222 !important;
+}   
+
+.card{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+.card-img-top{
+    border-radius: 1rem !important;
+    object-fit: cover !important;
+    width: 100% !important;
+}
+
+.card-body{
+    padding: 0 !important;
+}
+
+.card-text p{
+   font-weight: 400 !important;
+}
+
+.listing-link{
+    text-decoration: none;
+}
+
+/* card effect */
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: antiquewhite;
+}
+
+.add-btn{
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+/* rating- stars */
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: start;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 2rem;
+    color: #ccc;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #ffc107;
+}
+
+.review-card {
+  border: 2px solid #000;
+  border-radius: 5px;
+}

@@ -1,0 +1,21 @@
+<% layout("/layouts/boilerPlates") %>
+
+<div class="container mt-5">
+
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Oops! Something went wrong</h4>
+
+        <p><%= err.message %></p>
+
+        <hr>
+
+        <p class="mb-0">
+            Status Code: <%= err.statusCode || 500 %>
+        </p>
+    </div>
+
+    <a href="/listings" class="btn btn-primary">
+        Back to Listings
+    </a>
+
+</div>
