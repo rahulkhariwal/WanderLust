@@ -4,7 +4,19 @@
     <h2 class="text-center mb-4">Create an Account</h2>
 
     <form action="/signup" method="POST" class="needs-validation" novalidate>
-
+        
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                placeholder="Enter username"
+                required
+            >
+        </div>
+        
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input
