@@ -57,6 +57,7 @@
 
   <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6">
+      <% if(currUser) {%>
       <h4 class="mb-3">Leave a Review</h4>
 
       <form method="POST" action="/listings/<%= listing._id %>/reviews" novalidate class="needs-validation">
@@ -94,6 +95,7 @@
 
         <!-- Submit Button -->
         <button type="submit" class="btn btn-dark">Submit Review</button>
+            <% } %>
       </form>
     </div>
 
@@ -106,18 +108,27 @@
     <div class="col-md-4 mb-1">
       <div class="card border border-dark h-100">
          <div class="card-body d-flex flex-column">
+          <h6>
+              <i class="fa-solid fa-user"></i>
+              <%= review.author.username %>
+          </h6>
           <h6>⭐ <%= review.rating %>/5</h6>
           <p class="card-text"><%= review.comment %></p>
 
-          <form
-            method="POST"
-            action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
-            class="mt-auto"
-          >
-            <button class="btn btn-danger btn-sm">
-              Delete
-            </button>
-          </form>
+         <% if (
+              currUser &&
+              (
+                  listing.owner.equals(currUser._id) ||
+                  review.author._id.equals(currUser._id)
+              )
+          ) { %>
+              <form
+                  method="POST"
+                  action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+              >
+                  <button class="btn btn-danger btn-sm">Delete</button>
+              </form>
+          <% } %>
         </div>
       </div>
     </div>
