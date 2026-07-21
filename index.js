@@ -108,7 +108,8 @@ mongoose.connect(process.env.ATLASDB_URL)
 })
 
 
-app.listen(port , () => {
-    console.log("Server is running on post 8080");
-})
+const PORT = process.env.PORT || 8080;
 
+app.listen(PORT, () => {
+    console.log(`Server running on ${PORT}`);
+});
