@@ -51,7 +51,13 @@
             <%= listing.country %>
           </p>
 
-          <% if(currUser && listing.owner && currUser._id.equals(listing.owner._id)){ %>
+         <% if(
+          currUser &&
+          (
+            (listing.owner && listing.owner._id.equals(currUser._id)) ||
+            review.author._id.equals(currUser._id)
+          )
+        ){ %>
           <div class="d-flex gap-2 mt-3">
             <a
               href="/listings/<%= listing._id %>/edit"
