@@ -7,6 +7,7 @@ const methodOverride = require("method-override");
 const ejsMate = require('ejs-mate');
 const ExpressError = require("./utils/ExpressError.js");
 const session = require('express-session');
+const MongoStore = require("connect-mongo").default;
 const flash = require('express-flash');
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -29,8 +30,21 @@ app.engine('ejs', ejsMate);
 app.set("view engine" , "ejs");
 app.use(express.static(path.join(__dirname, 'public')));
 
+const store = MongoStore.create({
+    mongoUrl: process.env.ATLASDB_URL,
+    crypto: {
+        secret: process.env.SECRET,
+    },
+    touchAfter: 24 * 3600,
+});
+
+store.on("error", ()=>{
+    console.log("ERROR IN MONGO SESSION STORE", err)
+});
+
 const sessionOptions = {
-    secret: "mysecretcode",
+    store,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -39,10 +53,6 @@ const sessionOptions = {
         httpOnly: true
     }
 };
-
-app.get("/" , (req, res) =>{
-    res.send("route is working");
-})
 
 app.use(session(sessionOptions));
 app.use(flash())
@@ -75,20 +85,7 @@ app.use("/listings", listingRoute);
 app.use("/listings/:id/reviews" , reviewRoute);
 app.use("/", userRoute )
 
-//All Listing
 
-// app.get("/sampleListing" , async( req , res) =>{
-//     const sampleListing = new Listings({
-//         title: "villa",
-//         discription : "peace full place",
-//         price : 1200,
-//         location: " katmandu Nepal",
-//         country : "Nepal",
-//     })
-//     await sampleListing.save();
-//     console.log("smaple is save");
-//     res.send("successful");
-// })
 
 app.all("*path", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
@@ -102,8 +99,7 @@ app.use((err, req, res, next) => {
     });
 });
 
-
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.ATLASDB_URL)
 .then(() =>{
     console.log("MongoDB connected");
 })

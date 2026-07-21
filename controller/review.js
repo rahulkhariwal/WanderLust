@@ -5,6 +5,7 @@ const Review = require("../models/review");
 module.exports.createReview = async (req, res) => {
     const listing = await Listings.findById(req.params.id);
 
+     console.log("Listing Geometry:", listing.geometry);
     const newReview = new Review(req.body.review);
     newReview.author = req.user._id;
 

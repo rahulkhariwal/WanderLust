@@ -47,7 +47,6 @@ module.exports.createListing = async (req, res) => {
             limit: 1,
         })
         .send();
-
     let url = req.file.path;
     let filename = req.file.filename;
     const newListing = new Listings(req.body.listing);
