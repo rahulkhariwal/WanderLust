@@ -10,7 +10,16 @@
          <div class="card-body">
            <p class="card-text">
             <b> <%= listing.title %> </b></br>
-            ₹ <%= listing.price ? listing.price.toLocaleString("en-IN") : "0" %> /night
+           <p class="card-text">
+    <span class="base-price"
+          data-price="<%= listing.price %>">
+        ₹<%= listing.price.toLocaleString("en-IN") %>
+        </span>
+
+        <span class="tax-price d-none">
+            ₹<%= Math.round(listing.price * 1.18).toLocaleString("en-IN") %>
+        </span> / night
+          </p>
            </p>
          </div>
      </div>

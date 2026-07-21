@@ -1,24 +1,97 @@
-<nav class="navbar sticky-top navbar-expand-md navbar-light bg-white">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/"><i class="fa-regular fa-compass"></i></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" >
-      <span class="navbar-toggler-icon"></span> 
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="/">Home</a>
-        <a class="nav-link" href="/listings">All listing</a>
-        <a class="nav-link" href="/listings/new">Add listing</a>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container">
 
-      <div class="navbar-nav ms-auto">
-        <% if(!currUser) { %>
-          <a class="nav-link " href="/signup">Signup</a>
-          <a class="nav-link" href="/login">login</a>
-        <% } %> <% if(currUser) { %>
-          <a class="nav-link" href="/logout">logout</a>
-          <% } %>
-      </div>
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold fs-3 text-danger" href="/listings">
+            <i class="fa-regular fa-compass me-2"></i>WanderLust
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <!-- Search -->
+            <form class="d-flex mx-lg-auto my-3 my-lg-0 search-bar"
+                action="/listings"
+                method="GET">
+
+                <input
+                    class="form-control search-input"
+                    type="search"
+                    name="search"
+                    placeholder="Search by city">
+
+                <button class="btn search-btn" type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+
+            <!-- Right Side -->
+            <div class="d-flex align-items-center ms-lg-auto flex-column flex-lg-row">
+
+                <!-- Tax Toggle -->
+                <div class="tax-toggle me-lg-4 mb-3 mb-lg-0">
+                    <span class="me-2">After Taxes</span>
+
+                    <div class="form-check form-switch d-inline-block m-0">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="taxSwitch">
+                    </div>
+                </div>
+
+                <% if(!currUser){ %>
+
+                    <a class="btn btn-outline-dark rounded-pill me-2 mb-2 mb-lg-0"
+                        href="/login">
+                        Login
+                    </a>
+
+                    <a class="btn btn-danger rounded-pill"
+                        href="/signup">
+                        Sign Up
+                    </a>
+
+                <% } else { %>
+
+                    <span class="me-3 fw-semibold">
+                        👋 <%= currUser.username %>
+                    </span>
+
+                    <a class="btn btn-outline-danger rounded-pill"
+                        href="/logout">
+                        Logout
+                    </a>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
     </div>
-  </div>
 </nav>
+
+<!-- Second Navigation -->
+<div class="sub-navbar shadow-sm">
+    <div class="container d-flex justify-content-center gap-5 py-2">
+
+        <a href="/listings" class="sub-link">
+            <i class="fa-solid fa-house me-1"></i>
+            Explore
+        </a>
+
+        <a href="/listings/new" class="sub-link">
+            <i class="fa-solid fa-plus me-1"></i>
+            Airbnb Your Home
+        </a>
+
+    </div>
+</div>
